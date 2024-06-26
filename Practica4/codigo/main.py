@@ -20,8 +20,8 @@ class HardwareManagementCLIApp(Cmd):
     ############### END HARDWARE CONFIGURATION AND BEHAVIOR ########################
 
     ############### OS CONFIGURATION AND BEHAVIOR ########################
-    _scheduler_algorithm='LJF'
-    _quantum=0
+    _scheduler_algorithm='LRTF'
+    _quantum=1
     ############### END OS CONFIGURATION AND BEHAVIOR ########################
 
     ############### MANAGER CONFIGURATION AND BEHAVIOR ########################

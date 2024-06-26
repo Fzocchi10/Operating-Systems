@@ -12,6 +12,16 @@ class Loader:
     def __init__(self, kernel):
         self.__kernel = kernel
         self.__next_free_memory_addr = 0
+        self.__available_scheduling_algorithms = {
+            'FCFS': FCFSSchedulingAlgorithm(kernel, quantum),
+            'LJF':  LJFSchedulingAlgorithm(kernel, quantum),
+            'SJF':  SJFSchedulingAlgorithm(kernel, quantum),
+            'FPPS': FPPSSchedulingAlgorithm(kernel, quantum),
+            'SRTF': SRTFSchedulingAlgorithm(kernel, quantum),
+            'LRTF': LRTFSchedulingAlgorithm(kernel, quantum),
+            'RR':   RRSchedulingAlgorithm(kernel, quantum),
+        }
+    
 
     def load(self, data):
         """

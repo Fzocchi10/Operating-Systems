@@ -77,6 +77,7 @@ class PCB:
     def priority(self):
         """ Returns the priority of this PCB. """
         return self.__priority
+    
 
     @property
     def category(self):

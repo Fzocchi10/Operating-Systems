@@ -13,20 +13,26 @@ class SJFSchedulingAlgorithm(NonPreemptiveSchedulerAlgorithm):
     @property
     def next_process_id(self):
         """ Returns the next process ID to execute. """
-        self.__priority_queue.get()
+        next_pcb = self.__priority_queue.front
+        if (next_pcb == None):
+            return None
+        else:
+            return next_pcb.pid
        
     def move_to_ready(self, pid, pcb):
         """ Move a process with the given pid and matching pcb to the ready state. """
-        self.__priority_queue.put(pcb.remaining_time(self),id)
+        priority = - pcb.burst_time
+        self.__priority_queue.enqueue(pcb,priority)
 
     def move_to_running(self, pid, pcb):
         """ Move a process with the given pid and matching pcb to the running state. """
-        self.__priority_queue.get()
+        self.__priority_queue.dequeue()
     
     def move_to_waiting(self, pid, pcb):
         """ Move a process with the given pid and matching pcb to the waiting state. """
         pass
     
-    def _repr_(self):
+    def __repr__(self):
         # The repr should return the processes ready in their corresponding order.
         return str(self.__priority_queue)
+    
