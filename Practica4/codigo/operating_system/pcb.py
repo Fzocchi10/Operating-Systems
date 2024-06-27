@@ -67,10 +67,6 @@ class PCB:
     def pc(self, value):
         """ Assign the status of the PC registry for this PCB. """
         self.__pc = value
-    
-    def priority(self, value):
-        """ Assign the status of the PC registry for this PCB. """
-        self.__priority = value    
 
     @property
     def burst_time(self):

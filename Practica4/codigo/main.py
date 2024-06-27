@@ -20,13 +20,8 @@ class HardwareManagementCLIApp(Cmd):
     ############### END HARDWARE CONFIGURATION AND BEHAVIOR ########################
 
     ############### OS CONFIGURATION AND BEHAVIOR ########################
-<<<<<<< HEAD:Practica4/codigo/main.py
-    _scheduler_algorithm='LRTF'
-    _quantum=1
-=======
     _scheduler_algorithm='SJF'
-    _quantum=0
->>>>>>> 168618576eca33d7c0fff2a434526d62fd78b225:Practica 4/codigo/main.py
+    _quantum=1
     ############### END OS CONFIGURATION AND BEHAVIOR ########################
 
     ############### MANAGER CONFIGURATION AND BEHAVIOR ########################
