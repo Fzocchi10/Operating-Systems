@@ -49,6 +49,10 @@ class PCB:
         associated program for this PCB is store at.
         """
         return self.__memory_start
+    
+    @memory_start.setter
+    def memory_start(self,value):
+        self.__memory_start += value
 
     @property
     def memory_end(self):
