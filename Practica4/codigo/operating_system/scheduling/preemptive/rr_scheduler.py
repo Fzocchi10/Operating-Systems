@@ -10,12 +10,22 @@ class RRSchedulingAlgorithm(PreemptiveSchedulerAlgorithm):
 
     # TODO (5) Complete the class
     def __init__(self, kernel, quantum):
-        self.__kernel = kernel
-        self.__quantum = quantum
+        super().__init__(kernel, quantum)
 
         self.__ready_queue = Queue()
         self.__already_executed = Queue()
         self.__currently_running = None
+        self.__remaining_ticks = 0
+        HARDWARE.clock.add_subscriber(self)
+
+
+    def tick(self, tick_num):
+        if(self.__remaining_ticks < self.quantum()):
+            self.__remaining_ticks += 1
+
+        else:
+            self.__remaining_ticks = 0
+            IRQ.SWAP()
 
 
     @property
@@ -43,7 +53,10 @@ class RRSchedulingAlgorithm(PreemptiveSchedulerAlgorithm):
             self.__already_executed.enqueue(self.__currently_running)
             self.__currently_running = pcb
             IRQ.DISPATCH(self.is_preemptive)
-                
+
+
+        
+ 
     def __repr__(self):
         return str(self.__ready_queue)
                 
