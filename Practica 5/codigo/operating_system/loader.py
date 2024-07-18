@@ -1,4 +1,7 @@
 from hardware.hardware import HARDWARE
+from operating_system.memory_algoritmos.first_fit import FirstFitAlgorithm
+from operating_system.memory_algoritmos.best_fit import BestFitAlgorithm
+from operating_system.memory_algoritmos.worst_fit import WorstFitAlgorithm
 
 class Loader:
     """
@@ -9,17 +12,14 @@ class Loader:
     unloaded, the freed memory cannot be used back, yikes.
     """
 
-    def __init__(self, kernel):
+    def __init__(self, kernel,algoritmo):
         self.__kernel = kernel
         self.__next_free_memory_addr = 0
-        self.__available_scheduling_algorithms = {
-            'FCFS': FCFSSchedulingAlgorithm(kernel, quantum),
-            'LJF':  LJFSchedulingAlgorithm(kernel, quantum),
-            'SJF':  SJFSchedulingAlgorithm(kernel, quantum),
-            'FPPS': FPPSSchedulingAlgorithm(kernel, quantum),
-            'SRTF': SRTFSchedulingAlgorithm(kernel, quantum),
-            'LRTF': LRTFSchedulingAlgorithm(kernel, quantum),
-            'RR':   RRSchedulingAlgorithm(kernel, quantum),
+        self.__current_algorithm = algoritmo
+        self.__available_memory_algorithms = {
+            'FF' : FirstFitAlgorithm(kernel),
+            'WF' : WorstFitAlgorithm(kernel),
+            'BF' : BestFitAlgorithm(kernel),
         }
     
 

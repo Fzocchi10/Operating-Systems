@@ -10,36 +10,39 @@ class RRSchedulingAlgorithm(PreemptiveSchedulerAlgorithm):
 
     # TODO (5) Complete the class
     def __init__(self, kernel, quantum):
-        super().__init__(kernel,quantum)
-        
-        self.__quantumDescount = quantum
+        self.__kernel = kernel
+        self.__quantum = quantum
+
         self.__ready_queue = Queue()
-        
+        self.__already_executed = Queue()
+        self.__currently_running = None
 
 
     @property
     def next_process_id(self):
-        return self.__ready_queue.front
+        if self.__ready_queue.is_empty :
+            self.__already_executed.front
+        else :
+            self.__ready_queue.front
 
     
     def move_to_waiting(self, pid, pcb):
-        pass
+        self.__currently_running = None
 
 
+    
     def move_to_ready(self, pid, pcb):
         self.__ready_queue.enqueue(pid)
 
 
+    
     def move_to_running(self, pid, pcb):
-            if pcb.remaining_time > self.quantum:
-                while self.__quantumDescount > 0:
-                    self.__quantumDescount -= 1
-                    return pcb.memory_start
-                pcb.memory_start(self.quantum)
-                pcb.recalculate_remaining_time
-                self.__ready_queue.enqueue(pid)
-            else:
-                self.__ready_queue.dequeue()
+        if self.__currently_running.state == TERMINATED:
+            self.__currently_running = pcb
+        else:
+            self.__already_executed.enqueue(self.__currently_running)
+            self.__currently_running = pcb
+            IRQ.DISPATCH(self.is_preemptive)
                 
     def __repr__(self):
         return str(self.__ready_queue)

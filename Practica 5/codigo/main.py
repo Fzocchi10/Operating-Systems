@@ -20,6 +20,7 @@ class HardwareManagementCLIApp(Cmd):
     ############### END HARDWARE CONFIGURATION AND BEHAVIOR ########################
 
     ############### OS CONFIGURATION AND BEHAVIOR ########################
+    _memory_algorithm = 'FF'
     _scheduler_algorithm='FCFS'
     _quantum=0
     ############### END OS CONFIGURATION AND BEHAVIOR ########################

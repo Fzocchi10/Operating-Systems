@@ -19,7 +19,7 @@ from operating_system.irq_handlers.dispatch_interruption_handler import Dispatch
 class Kernel:
     """ Models the kernel of the OS. """
 
-    def __init__(self, scheduling_strategy = 'FCFS', quantum = 0):
+    def __init__(self, scheduling_strategy = 'FCFS', quantum = 0, memory_algoritmo = 'FF'):
         # The process table holds all the PCB's, it contains information
         # of all the processes currently alive in the system. It also holds
         # other additional behavior, such as answering which is the next PID.
@@ -29,7 +29,7 @@ class Kernel:
         # should perform heuristics to determine if it's a good time or not
         # to add a process, and when it should be added. Instead, we are going
         # to pursue a simpler approach. Our LTS was currently only a loader.
-        self.__loader = Loader(self)
+        self.__loader = Loader(self,memory_algoritmo)
         # The Dispatcher is the part of the OS in charge of switching the
         # context of the CPU from one process to the next. It does not
         # control which process to load, but jut loads and unloads a process.
